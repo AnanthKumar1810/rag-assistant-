@@ -1,0 +1,13 @@
+[
+  {"question":"How many chest radiographs are in CheXpert?","page":0,"evidence":"224,316 chest radiographs"},
+  {"question":"How many patients contributed to the CheXpert dataset?","page":0,"evidence":"65,240 patients"},
+  {"question":"How many observations does the report labeler extract?","page":1,"evidence":"14 observations"},
+  {"question":"What does the U-Ones uncertainty strategy mean in the validation comparison?","page":3,"evidence":"U-Ones 0.858"},
+  {"question":"What does the U-Zeros strategy score for atelectasis AUROC?","page":3,"evidence":"U-Zeros 0.811"},
+  {"question":"Which DenseNet architecture was compared in the model selection?","page":3,"evidence":"DenseNet121"},
+  {"question":"How many patients were in the sampled test studies?","page":4,"evidence":"200 patients"},
+  {"question":"Which calibration method was considered alongside isotonic regression?","page":6,"evidence":"Platt scaling"},
+  {"question":"What was the macro-average mention F1 of the report labeler?","page":2,"evidence":"0.948"},
+  {"question":"What probability did the model assign to edema in the illustrated case?","page":5,"evidence":"0 .824"}
+]
+
