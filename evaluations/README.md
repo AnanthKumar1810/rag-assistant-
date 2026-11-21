@@ -24,3 +24,12 @@ supported/unsupported/partial label and a short justification. Compare top-1
 and top-3 on the same fixed questions; report counts by rank and label. Do not
 put an answer accuracy number on a resume until those labels exist.
 
+The bundled `chexpert_questions.json` contains 10 source-checked questions.
+`offline_probe.py` and `chunk_sweep.py` use cached MiniLM embeddings and fixed
+character windows, avoiding app dependencies for a local diagnostic. Their
+reports are **not** the app's RecursiveCharacterTextSplitter/Chroma results.
+`paired_answer_probe.py` compares a local Ollama model at k=1/3/4 on three
+questions. Its outputs require human grounding labels before answer-quality
+rates can be reported. The app itself uses Claude and expands from top-3 to
+top-4 only after an explicit abstention.
+
