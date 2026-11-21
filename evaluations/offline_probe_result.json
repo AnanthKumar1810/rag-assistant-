@@ -1,0 +1,100 @@
+{
+  "protocol": "fixed-character-window offline probe; not LangChain recursive splitting or Chroma",
+  "cases": 10,
+  "chunks": 60,
+  "recall_at_1": 0.3,
+  "recall_at_3": 0.5,
+  "mrr_at_3": 0.4,
+  "details": [
+    {
+      "question": "How many chest radiographs are in CheXpert?",
+      "evidence_rank": 4,
+      "pages": [
+        1,
+        6,
+        6
+      ]
+    },
+    {
+      "question": "How many patients contributed to the CheXpert dataset?",
+      "evidence_rank": 2,
+      "pages": [
+        1,
+        0,
+        6
+      ]
+    },
+    {
+      "question": "How many observations does the report labeler extract?",
+      "evidence_rank": 7,
+      "pages": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "question": "What does the U-Ones uncertainty strategy mean in the validation comparison?",
+      "evidence_rank": 40,
+      "pages": [
+        4,
+        3,
+        2
+      ]
+    },
+    {
+      "question": "What does the U-Zeros strategy score for atelectasis AUROC?",
+      "evidence_rank": 2,
+      "pages": [
+        6,
+        3,
+        4
+      ]
+    },
+    {
+      "question": "Which DenseNet architecture was compared in the model selection?",
+      "evidence_rank": 1,
+      "pages": [
+        3,
+        6,
+        1
+      ]
+    },
+    {
+      "question": "How many patients were in the sampled test studies?",
+      "evidence_rank": 11,
+      "pages": [
+        6,
+        7,
+        1
+      ]
+    },
+    {
+      "question": "Which calibration method was considered alongside isotonic regression?",
+      "evidence_rank": 1,
+      "pages": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "question": "What was the macro-average mention F1 of the report labeler?",
+      "evidence_rank": 15,
+      "pages": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "question": "What probability did the model assign to edema in the illustrated case?",
+      "evidence_rank": 1,
+      "pages": [
+        5,
+        5,
+        6
+      ]
+    }
+  ]
+}
