@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 class Answer(BaseModel):
     answer: str = Field(description="Answer based only on supplied passages; empty if absent")
     source_pages: list[int] = Field(description="Zero-based page indices supporting the answer")
+    evidence_quotes: list[str] = Field(description="Exact supporting substrings copied from retrieved passages")
     found: bool = Field(description="False when passages do not contain the answer")
 
 
@@ -12,16 +13,19 @@ def ask_structured(vectorstore, question: str, llm):
     docs = vectorstore.similarity_search(question, k=3)
     context = "\n\n".join(f"[page {d.metadata.get('page', '?')}] {d.page_content}" for d in docs)
     prompt = ("Answer only using these PDF passages. If they do not establish the answer, "
-              "set found=false, answer='' and source_pages=[]. Cite zero-based page indices.\n"
+              "set found=false, answer='', source_pages=[] and evidence_quotes=[]. "
+              "Quote exact supporting spans and cite zero-based page indices.\n"
               f"Passages:\n{context}\n\nQuestion: {question}")
     result = llm.with_structured_output(Answer, include_raw=True).invoke(prompt)
     if result.get("parsing_error") or not isinstance(result.get("parsed"), Answer):
         raise ValueError("Model response failed the structured answer schema")
     answer = result["parsed"]
     allowed = {d.metadata.get("page") for d in docs}
-    if (answer.found and (not answer.answer.strip() or not answer.source_pages)) or (
-        not answer.found and (answer.answer.strip() or answer.source_pages)
-    ) or any(page not in allowed for page in answer.source_pages):
+    if (answer.found and (not answer.answer.strip() or not answer.source_pages or not answer.evidence_quotes)) or (
+        not answer.found and (answer.answer.strip() or answer.source_pages or answer.evidence_quotes)
+    ) or any(page not in allowed for page in answer.source_pages) or any(
+        not quote.strip() or not any(quote in d.page_content and d.metadata.get("page") in answer.source_pages
+                                     for d in docs) for quote in answer.evidence_quotes):
         raise ValueError("Structured answer references absent evidence or contradicts found status")
     return answer, docs
 
