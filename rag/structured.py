@@ -16,9 +16,13 @@ def _ask_once(vectorstore, question: str, llm, k: int):
               "set found=false, answer='', source_pages=[] and evidence_quotes=[]. "
               "Quote exact supporting spans and cite zero-based page indices.\n"
               f"Passages:\n{context}\n\nQuestion: {question}")
-    result = llm.with_structured_output(Answer, include_raw=True).invoke(prompt)
+    structured = llm.with_structured_output(Answer, include_raw=True)
+    result = structured.invoke(prompt)
     if result.get("parsing_error") or not isinstance(result.get("parsed"), Answer):
-        raise ValueError("Model response failed the structured answer schema")
+        # One bounded schema retry; malformed markdown/trailing text never becomes a tool result.
+        result = structured.invoke(prompt + "\nYour previous response failed schema validation. Return only the required structured fields.")
+        if result.get("parsing_error") or not isinstance(result.get("parsed"), Answer):
+            raise ValueError("Model response failed the structured answer schema after one retry")
     answer = result["parsed"]
     allowed = {d.metadata.get("page") for d in docs}
     if (answer.found and (not answer.answer.strip() or not answer.source_pages or not answer.evidence_quotes)) or (
