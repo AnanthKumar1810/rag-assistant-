@@ -26,3 +26,12 @@ def test_rank_metrics_and_missing_evidence():
     assert report["mrr_at_3"] == .5
     assert [x["evidence_rank"] for x in report["details"]] == [1, 2, None]
 
+
+def test_duplicate_supporting_passage_on_another_page_counts():
+    class DuplicateStore:
+        def similarity_search(self, query, k):
+            return [Doc("target evidence", {"page": 4})]
+    report = evaluate_cases(DuplicateStore(), [
+        {"question": "first", "page": 1, "evidence": "target evidence"}])
+    assert report["recall_at_1"] == 1
+
