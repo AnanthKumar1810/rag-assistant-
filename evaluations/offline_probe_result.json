@@ -2,13 +2,13 @@
   "protocol": "fixed-character-window offline probe; not LangChain recursive splitting or Chroma",
   "cases": 10,
   "chunks": 60,
-  "recall_at_1": 0.3,
-  "recall_at_3": 0.5,
-  "mrr_at_3": 0.4,
+  "recall_at_1": 0.5,
+  "recall_at_3": 0.7,
+  "mrr_at_3": 0.6,
   "details": [
     {
       "question": "How many chest radiographs are in CheXpert?",
-      "evidence_rank": 4,
+      "evidence_rank": 1,
       "pages": [
         1,
         6,
@@ -26,7 +26,7 @@
     },
     {
       "question": "How many observations does the report labeler extract?",
-      "evidence_rank": 7,
+      "evidence_rank": 1,
       "pages": [
         2,
         2,
