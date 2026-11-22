@@ -30,9 +30,7 @@ def evaluate_cases(vectorstore, cases, k=3):
 
 
 def main():
-    from rag.loader import load_and_chunk
-    from rag.vectorstore import get_embeddings
-    from langchain_chroma import Chroma
+    from rag.native import load_and_chunk, create_vectorstore
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("pdf", type=Path)
     parser.add_argument("questions", type=Path)
@@ -46,7 +44,7 @@ def main():
                    for chunk in chunks):
             raise ValueError(f"Gold evidence not present in a single indexed chunk: {case.get('question')}")
     # Fresh in-memory index prevents earlier uploads from leaking into this run.
-    vectorstore = Chroma.from_documents(documents=chunks, embedding=get_embeddings())
+    vectorstore = create_vectorstore(chunks, persist_directory=None)
     report = evaluate_cases(vectorstore, cases)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")
