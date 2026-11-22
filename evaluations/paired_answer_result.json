@@ -1,0 +1,107 @@
+[
+  {
+    "question": "How many chest radiographs are in CheXpert?",
+    "gold_evidence": "224,316 chest radiographs",
+    "k": 1,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      1
+    ],
+    "answer": "CheXpert consists of 224,316 chest radiographs."
+  },
+  {
+    "question": "How many chest radiographs are in CheXpert?",
+    "gold_evidence": "224,316 chest radiographs",
+    "k": 3,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      1,
+      6,
+      6
+    ],
+    "answer": "CheXpert consists of 224,316 chest radiographs."
+  },
+  {
+    "question": "How many chest radiographs are in CheXpert?",
+    "gold_evidence": "224,316 chest radiographs",
+    "k": 4,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      1,
+      6,
+      6,
+      0
+    ],
+    "answer": "CheXpert consists of 224,316 chest radiographs."
+  },
+  {
+    "question": "How many patients contributed to the CheXpert dataset?",
+    "gold_evidence": "65,240 patients",
+    "k": 1,
+    "evidence_in_context": false,
+    "retrieved_pages": [
+      1
+    ],
+    "answer": "Not found in passages."
+  },
+  {
+    "question": "How many patients contributed to the CheXpert dataset?",
+    "gold_evidence": "65,240 patients",
+    "k": 3,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      1,
+      0,
+      6
+    ],
+    "answer": "65,240 patients contributed to the CheXpert dataset."
+  },
+  {
+    "question": "How many patients contributed to the CheXpert dataset?",
+    "gold_evidence": "65,240 patients",
+    "k": 4,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      1,
+      0,
+      6,
+      1
+    ],
+    "answer": "The CheXpert dataset consists of 65,240 patients."
+  },
+  {
+    "question": "How many observations does the report labeler extract?",
+    "gold_evidence": "14 observations",
+    "k": 1,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      2
+    ],
+    "answer": "Not found in passages."
+  },
+  {
+    "question": "How many observations does the report labeler extract?",
+    "gold_evidence": "14 observations",
+    "k": 3,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      2,
+      2,
+      2
+    ],
+    "answer": "Not found in passages."
+  },
+  {
+    "question": "How many observations does the report labeler extract?",
+    "gold_evidence": "14 observations",
+    "k": 4,
+    "evidence_in_context": true,
+    "retrieved_pages": [
+      2,
+      2,
+      2,
+      1
+    ],
+    "answer": "Not found in passages."
+  }
+]
