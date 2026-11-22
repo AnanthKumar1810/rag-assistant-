@@ -23,6 +23,22 @@ class Model:
     def invoke(self, prompt): return self.result
 
 
+def test_malformed_response_gets_one_bounded_schema_retry():
+    class RetryingModel(Model):
+        def __init__(self): self.calls = 0
+        def invoke(self, prompt):
+            self.calls += 1
+            if self.calls == 1:
+                return {"parsed": None, "parsing_error": ValueError("markdown fence")}
+            assert "failed schema validation" in prompt
+            return {"parsed": Answer(answer="224,316", source_pages=[2],
+                                     evidence_quotes=["224,316 radiographs"], found=True),
+                    "parsing_error": None}
+    model = RetryingModel()
+    answer, _ = ask_structured(Store(), "How many?", model)
+    assert answer.found and model.calls == 2
+
+
 def test_supported_answer_and_source_page():
     answer, docs = ask_structured(Store(), "How many images?", Model({
         "parsed": Answer(answer="224,316 radiographs", source_pages=[2],
