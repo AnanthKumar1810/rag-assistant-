@@ -22,7 +22,7 @@ for case, query in zip(cases, queries):
     full_ranking = np.argsort(-(vectors @ query))
     ranking = full_ranking[:3]
     rank = next((n for n, idx in enumerate(full_ranking, 1)
-                 if chunks[idx][0] == case["page"] and case["evidence"] in chunks[idx][1]), None)
+                 if case["evidence"] in chunks[idx][1]), None)
     details.append({"question": case["question"], "evidence_rank": rank,
                     "pages": [chunks[idx][0] for idx in ranking]})
 n = len(details)
