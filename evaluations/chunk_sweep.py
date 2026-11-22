@@ -19,7 +19,7 @@ for size, overlap in [(500, 100), (1000, 200), (1500, 300)]:
     for case, query in zip(cases, queries):
         ranking = np.argsort(-(vectors @ query))
         ranks.append(next((n for n, idx in enumerate(ranking, 1)
-                           if chunks[idx][0] == case["page"] and case["evidence"] in chunks[idx][1]), None))
+                           if case["evidence"] in chunks[idx][1]), None))
     out.append({"chunk_size":size,"overlap":overlap,"chunks":len(chunks),
                 "recall_at_1":sum(r == 1 for r in ranks)/len(ranks),
                 "recall_at_3":sum(r is not None and r <= 3 for r in ranks)/len(ranks),
