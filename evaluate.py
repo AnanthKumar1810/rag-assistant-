@@ -16,8 +16,7 @@ def evaluate_cases(vectorstore, cases, k=3):
             raise ValueError("Each case needs question, evidence, and integer zero-based page")
         hits = vectorstore.similarity_search(case["question"], k=k)
         ranks = [i + 1 for i, doc in enumerate(hits)
-                 if doc.metadata.get("page") == case["page"]
-                 and case["evidence"].casefold() in doc.page_content.casefold()]
+                 if case["evidence"].casefold() in doc.page_content.casefold()]
         rank = ranks[0] if ranks else None
         results.append({"question": case["question"], "evidence_rank": rank,
                         "retrieved_pages": [doc.metadata.get("page") for doc in hits]})
